@@ -3,9 +3,12 @@ import { useAppSelector } from '../../../store/hooks';
 import { useMemo } from 'react';
 import { FX } from '../../../interfaces';
 
-import imgUrl from '../../../assets/flags/se.png';
-import imgSkUrl from '../../../assets/flags/sk.png';
+// import imgUrl from '../../../assets/flags/se.png';
+// import imgSkUrl from '../../../assets/flags/sk.png';
 import { useUrlSearchCurrencyValueHook } from '../SearchPage.service';
+
+const imgUrl = 'https://www.countryflags.io/se/flat/64.png';
+const imgSkUrl = 'https://www.countryflags.io/sk/flat/64.png';
 
 function Flag({ item }: { item: FX }) {
   const src = item.flags?.[0] === 'provided' ? imgUrl : imgSkUrl;
@@ -46,10 +49,7 @@ function SearchResultRow({ item, currency }: { item: FX; currency: string }) {
   );
 }
 
-export function SearchResultContainer() {
-  const currency = useUrlSearchCurrencyValueHook();
-  const data = useAppSelector((state) => state.searchPage.data);
-
+export function SearchResultGrid({ data, currency }: { data: FX[]; currency: string }) {
   const rows = useMemo(
     () =>
       data.map((item) => {
@@ -57,7 +57,6 @@ export function SearchResultContainer() {
       }),
     [currency, data],
   );
-
   return (
     <Box>
       <Grid container spacing={2}>
@@ -65,4 +64,11 @@ export function SearchResultContainer() {
       </Grid>
     </Box>
   );
+}
+
+export function SearchResultContainer() {
+  const currency = useUrlSearchCurrencyValueHook();
+  const data = useAppSelector((state) => state.searchPage.data);
+
+  return <SearchResultGrid currency={currency} data={data} />;
 }

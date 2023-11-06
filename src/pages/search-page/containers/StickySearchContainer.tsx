@@ -31,7 +31,7 @@ function SearchInput({
       <TextField
         sx={{ outlineColor: 'white', paddingLeft: '10px' }}
         InputProps={{ sx: { color: 'white' } }}
-        value={searchInput}
+        value={searchInput ?? ''}
         variant="outlined"
         onChange={(e) => setSearchParam(e.target.value)}
       />
