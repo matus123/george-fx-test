@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { FX } from '../interfaces';
 
 interface SearchPageState {
-  data: any[];
+  data: FX[];
 }
 
 const initialState: SearchPageState = { data: [] };
@@ -11,7 +12,7 @@ const seachPageSlice = createSlice({
   name: 'searchPage',
   initialState,
   reducers: {
-    setData(state, action: PayloadAction<any[]>) {
+    setData(state, action: PayloadAction<FX[]>) {
       state.data = action.payload;
     },
   },
